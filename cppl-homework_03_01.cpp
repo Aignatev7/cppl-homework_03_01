@@ -1,25 +1,32 @@
 #include <iostream>
 
-class smart_array {
+class Smart_array {
+	int* arr;
+	int size = 0;
+	int number_of_filled_items = 0;    //количество заполненных элементов
+
 public:
-	smart_array(int size) {
+	Smart_array(int size) {
+		this->size = size;
+		arr = new int[size];
 		set_arr(size);
 	}
 
 	int add_element(int value) {
-		std::cout << value << std::endl;
+		number_of_filled_items++;
 		return value;
 	}
 
 	int* set_arr(int size) {
-		int* arr = new int[size];
-
-		for (int i = 0; i < size; i++)
-			std::cout << arr[i] << std::endl;
+		std::cout << number_of_filled_items << std::endl;
+		if (size < number_of_filled_items)
+			for (int i = 0; i < size; i++)
+				std::cout << arr[i] << std::endl;
 		return arr;
 	}
-	~smart_array() {
 
+	~Smart_array() {
+		delete arr;
 	}
 
 	int get_element(int elem) {
@@ -30,7 +37,7 @@ public:
 int main()
 {
 	try {
-		smart_array arr(5);
+		Smart_array arr(5);
 		arr.add_element(1);
 		arr.add_element(4);
 		arr.add_element(155);
@@ -43,6 +50,7 @@ int main()
 		std::cout << ex.what() << std::endl;
 	}
 }
+
 
 
 
