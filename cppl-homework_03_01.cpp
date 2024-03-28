@@ -11,23 +11,27 @@ public:
 		arr = new int[size];
 	}
 
-	int add_element(int value) {
-		arr[i] = value;
-		std::cout << "arr[" << i << "] = " << arr[i] << std::endl;
-		i++;
-		number_of_filled_items++;
-		if (number_of_filled_items == size)
+	 void add_element(int value) {
+		if (number_of_filled_items >= size)
 		{
 			throw std::runtime_error("Количество элементов больше количества элементов, на которую выделена память");
 		}
+		arr[i] = value;
+		std::cout << "arr[" << i << "] = " << arr[i] << std::endl;
+		i++;
+		number_of_filled_items++;	
+	}
+
+	int get_element(int elem) {
+		if (elem >= size)
+		{
+			throw std::runtime_error("Размер массива не позволяет хранить такое количество элементов");
+		}
+		return arr[elem];
 	}
 
 	~Smart_array() {
 		delete arr;
-	}
-
-	int get_element(int elem) {
-		return elem;
 	}
 };
 
@@ -41,7 +45,7 @@ int main()
 		arr.add_element(155);
 		arr.add_element(14);
 		arr.add_element(15);
-		arr.add_element(17);
+		//arr.add_element(17);
 		std::cout << arr.get_element(1) << std::endl;
 	}
 	catch (const std::exception& ex) {
